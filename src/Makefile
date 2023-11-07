@@ -1,10 +1,10 @@
-# Ethan Stevenson, 3131095, lab07
+# lab09
 
 CC=gcc
 CFLAGS=-Wall -std=c11
-LDFLAGS=-lm
+LDFLAGS=-lm -lncursesw
 
-exec: test_pointerFun.o pointerFun.o pointerFun.h
+game: main.o
 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^
 
 %.o : %.c
@@ -12,4 +12,4 @@ exec: test_pointerFun.o pointerFun.o pointerFun.h
 
 .PHONY:
 clean:
-	rm -f exec *.o *~
+	rm -f game *.o *~
