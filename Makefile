@@ -2,7 +2,7 @@
 
 CC=gcc
 CFLAGS=-Wall -std=c11
-LDFLAGS=-lm -lncursesw
+LDFLAGS=-lm -lncursesw -ltinfo
 
 game: src/main.o
 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^

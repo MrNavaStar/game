@@ -36,20 +36,21 @@ void drawSplashScreen(WINDOW *w) {
 
 int main() {
     WINDOW *w;
-    setlocale(LC_ALL, "");
+    setlocale(LC_ALL, ""); // Set locale so utf8 chars print correctly
     initscr();
     start_color();
     cbreak();
     noecho();
-    curs_set(0);
+    curs_set(0); // Hide cursor
     w = newwin(30, 80, 0, 0);
     refresh();
 
-    init_pair(1, COLOR_RED, COLOR_BLACK); // Define a color pair with red text on a black background
+    init_pair(1, COLOR_CYAN, COLOR_BLACK); // Define a color pair with cyan text on a black background
 
     drawSplashScreen(w);
 
-    int ch = getch();
+    // Wait for key press
+    getch();
     
     endwin();
     return 0;
