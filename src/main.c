@@ -45,7 +45,7 @@ int main() {
     w = newwin(30, 80, 0, 0);
     refresh();
 
-    init_pair(1, COLOR_CYAN, COLOR_BLACK); // Define a color pair with cyan text on a black background
+    init_pair(1, COLOR_GREEN, COLOR_BLACK); // Define a color pair with cyan text on a black background
 
     drawSplashScreen(w);
 
