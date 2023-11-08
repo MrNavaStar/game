@@ -32,9 +32,22 @@ void render_text(wchar_t *text, int x, int y) {
 
 // Get the screen width of a single line or block of text
 int get_width(wchar_t *text) {
-    int len = 0;
-    while(text[len] != '\n' && text[len] != '\0') len++;
-    return len;
+    int maxLen = 0;
+    int currentLen = 0;
+    int totalLen = 0;
+
+    // Find the length of the longest line without a new line
+    while(text[totalLen] != '\0') {
+        if (text[totalLen] == '\n') {
+            if (currentLen > maxLen) maxLen = currentLen;
+            currentLen = 0;
+        }
+        currentLen++;
+        totalLen++;
+    }
+
+    if (currentLen > maxLen) maxLen = currentLen;
+    return maxLen;
 }
 
 // Returns the x position that will result in the given text block being centered on the screen
