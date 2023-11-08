@@ -1,9 +1,9 @@
 #include <curses.h>
 
-void initColors();
+void init_colors();
 
-void splashScreen(WINDOW *w);
+void splash_screen(WINDOW *w);
 
-void gameOverScreen(WINDOW *w);
+void game_over_screen(WINDOW *w);
 
-void victoryScreen(WINDOW *w);
+void victory_screen(WINDOW *w);

@@ -8,14 +8,14 @@
 #define TEXT_GREEN COLOR_PAIR(1)
 #define TEXT_RED COLOR_PAIR(2)
 
-void initColors() {
+void init_colors() {
     start_color();
     init_pair(1, COLOR_GREEN, COLOR_BLACK);
     init_pair(2, COLOR_RED, COLOR_BLACK);
 }
 
 // Render single or multiline text at the given coords
-void renderText(wchar_t *text, int x, int y) {
+void render_text(wchar_t *text, int x, int y) {
     wchar_t *state;
     wchar_t *line;
     line = wcstok(text, L"\n", &state);
@@ -31,26 +31,26 @@ void renderText(wchar_t *text, int x, int y) {
 }
 
 // Get the screen width of a single line or block of text
-int getWidth(wchar_t *text) {
+int get_width(wchar_t *text) {
     int len = 0;
     while(text[len] != '\n' && text[len] != '\0') len++;
     return len;
 }
 
 // Returns the x position that will result in the given text block being centered on the screen
-int centerText(WINDOW *w, wchar_t *text) {
-    return (getmaxx(w) / 2) - (getWidth(text) / 2);
+int center_text(WINDOW *w, wchar_t *text) {
+    return (getmaxx(w) / 2) - (get_width(text) / 2);
 }
 
-void renderContinuePrompt(WINDOW *w) {
+void render_continue_prompt(WINDOW *w, int y) {
     wchar_t press[] = L"Press Any Key To Continue";
-    renderText(press, centerText(w, press), 25);
+    render_text(press, center_text(w, press), y);
     //Wait for key press
     getch();
 }
 
 // Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
-void splashScreen(WINDOW *w) {
+void splash_screen(WINDOW *w) {
     clear();
     wchar_t cryptic[] = L" ▄████▄   ██▀███ ▓██   ██▓ ██▓███  ▄▄▄█████▓ ██▓ ▄████▄  \n"
                          "▒██▀ ▀█  ▓██ ▒ ██▒▒██  ██▒▓██░  ██▒▓  ██▒ ▓▒▓██▒▒██▀ ▀█  \n"
@@ -75,14 +75,17 @@ void splashScreen(WINDOW *w) {
                           "░                                                                       ";
 
     attron(TEXT_GREEN);
-    renderText(cryptic, centerText(w, cryptic), 2);
-    renderText(conquest, centerText(w, conquest), 13);
+    render_text(cryptic, center_text(w, cryptic), 2);
+    render_text(conquest, center_text(w, conquest), 13);
     attroff(TEXT_GREEN);
-    renderContinuePrompt(w);
+
+    wchar_t controls[] = L"Use WASD To Move - E To Interact";
+    render_text(controls, center_text(w, controls), 25);
+    render_continue_prompt(w, 27);
 }
 
 // Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
-void gameOverScreen(WINDOW *w) {
+void game_over_screen(WINDOW *w) {
     clear();
     wchar_t game[] = L"  ▄████  ▄▄▄       ███▄ ▄███▓▓█████ \n"
                       " ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀ \n"
@@ -107,14 +110,14 @@ void gameOverScreen(WINDOW *w) {
                       "              ░                   ";
 
     attron(TEXT_RED);
-    renderText(game, centerText(w, game), 2);
-    renderText(over, centerText(w, over), 13);
+    render_text(game, center_text(w, game), 2);
+    render_text(over, center_text(w, over), 13);
     attroff(TEXT_RED);
-    renderContinuePrompt(w);
+    render_continue_prompt(w, 25);
 }
 
 // Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
-void victoryScreen(WINDOW *w) {
+void victory_screen(WINDOW *w) {
     clear();
     wchar_t victory[] = L" ██▒   █▓ ██▓ ▄████▄  ▄▄▄█████▓ ▒█████   ██▀███ ▓██   ██▓\n"
                          "▓██░   █▒▓██▒▒██▀ ▀█  ▓  ██▒ ▓▒▒██▒  ██▒▓██ ▒ ██▒▒██  ██▒\n"
@@ -127,7 +130,7 @@ void victoryScreen(WINDOW *w) {
                          "      ░   ░  ░ ░                   ░ ░     ░     ░ ░     \n"
                          "     ░       ░                                   ░ ░     ";
     attron(TEXT_GREEN);
-    renderText(victory, centerText(w, victory), 10);
+    render_text(victory, center_text(w, victory), 10);
     attroff(TEXT_GREEN);
-    renderContinuePrompt(w);
+    render_continue_prompt(w, 25);
 }
