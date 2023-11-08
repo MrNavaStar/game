@@ -4,7 +4,7 @@ CC=gcc
 CFLAGS=-Wall -std=c11
 LDFLAGS=-lm -lncursesw -ltinfo
 
-game: main.o
+game: main.o screens.o screens.h
 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^
 
 %.o : %.c

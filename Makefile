@@ -7,7 +7,7 @@ LDFLAGS=-lm -lncursesw -ltinfo
 game: src/main.o
 	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^
 
-%.o : %.c
+%.o : src/%.c
 	$(CC) $(CFLAGS) $(LDFLAGS) -c $^
 
 .PHONY:
