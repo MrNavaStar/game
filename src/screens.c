@@ -62,6 +62,19 @@ void render_continue_prompt(WINDOW *w, int y) {
     getch();
 }
 
+void terminal_too_small_screen(WINDOW *w) {
+    clear();
+    wchar_t too_small[] = L"Terminal window too small!";
+    wchar_t size[] = L"Must be at least 30x80!";
+    wchar_t warn[] = L"Expect visual artifacts!";
+    attron(TEXT_RED);
+    render_text(too_small, center_text(w, too_small), 2);
+    render_text(size, center_text(w, size), 3);
+    render_text(warn, center_text(w, warn), 4);
+    attroff(TEXT_RED);
+    render_continue_prompt(w, 5);
+}
+
 // Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
 void splash_screen(WINDOW *w) {
     clear();

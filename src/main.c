@@ -11,8 +11,8 @@ int main() {
     noecho();
     curs_set(0); // Hide cursor
 
-    w = newwin(30, 80, 0, 0);
-    refresh();
+    w = newwin(LINES, COLS, 0, 0);
+    if (LINES < 30 || COLS < 80) terminal_too_small_screen(w);
 
     splash_screen(w);
     //game_over_screen(w);
