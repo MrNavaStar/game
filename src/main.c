@@ -1,6 +1,7 @@
 #include <curses.h>
 #include <locale.h>
 #include "screens.h"
+#include "levels.h"
 
 int main() {
     WINDOW *w;
@@ -17,7 +18,12 @@ int main() {
     splash_screen(w);
     //game_over_screen(w);
     //victory_screen(w);
-
+    display_level(1);
+    getch();
+    display_level(2);
+    getch();
+    display_level(3);
+    getch();
     endwin();
     return 0;
 }
