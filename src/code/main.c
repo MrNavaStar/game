@@ -18,11 +18,11 @@ int main() {
     splash_screen(w);
     //game_over_screen(w);
     //victory_screen(w);
-    display_level(1);
+    display_level(w, 1);
     getch();
-    display_level(2);
+    display_level(w, 2);
     getch();
-    display_level(3);
+    display_level(w, 3);
     getch();
     endwin();
     return 0;

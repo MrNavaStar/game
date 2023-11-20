@@ -4,12 +4,11 @@ CC=gcc
 CFLAGS=-Wall -std=c11
 LDFLAGS=-lm -lncursesw -ltinfo
 
-game: src/main.o
-	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $^
-
-%.o : src/%.c
-	$(CC) $(CFLAGS) $(LDFLAGS) -c $^
+game:
+	cd src
+	make
 
 .PHONY:
 clean:
+	cd src
 	rm -f game *.o *~

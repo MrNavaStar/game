@@ -2,12 +2,14 @@
 #include <curses.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
+#include "../headers/screens.h"
 
 
-void display_level(int level) {
+void display_level(WINDOW *w, int level) {
 	clear();
 	FILE *fptr;
-	char ch;
+	wchar_t levelStr[2400]; // 30*80 chars = 2400
 
     char level_index[2];
     sprintf(level_index, "%d", level);
@@ -17,6 +19,7 @@ void display_level(int level) {
     strcat(file_name, ".txt");
 
     fptr = fopen(file_name, "r");
+
     if (fptr == NULL) {
         endwin();
         printf("File cannot be read!\n");
@@ -26,10 +29,8 @@ void display_level(int level) {
 
     // In the future we will load into an array, so we can move the player around. But for now just print it
     for (int i = 0; i<30; i++) {
-        for (int j = 0; j<80; j++) {
-            ch = fgetc(fptr);
-            mvaddch(i,j,ch);
-        }
+        fgetws(levelStr, 2400, fptr);
+        printw("%ls", levelStr);
     }
 	fclose(fptr);
 }
