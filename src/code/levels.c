@@ -11,15 +11,13 @@ void display_level(WINDOW *w, int level) {
 	FILE *fptr;
 	wchar_t levelStr[2400]; // 30*80 chars = 2400
 
+    char file_name[18] = "assets/level";
     char level_index[2];
     sprintf(level_index, "%d", level);
-
-    char file_name[18] = "assets/level";
     strcat(file_name, level_index);
     strcat(file_name, ".txt");
 
     fptr = fopen(file_name, "r");
-
     if (fptr == NULL) {
         endwin();
         printf("File cannot be read!\n");

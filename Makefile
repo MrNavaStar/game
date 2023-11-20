@@ -1,14 +1,9 @@
 # lab09
 
-CC=gcc
-CFLAGS=-Wall -std=c11
-LDFLAGS=-lm -lncursesw -ltinfo
-
 game:
-	cd src
-	make
+	cd src && make && mv game ../game && cp -r assets ../assets
 
 .PHONY:
 clean:
-	cd src
-	rm -f game *.o *~
+	rm -r -f game assets
+	cd src && make clean
