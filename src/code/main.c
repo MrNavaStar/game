@@ -1,7 +1,7 @@
 #include <curses.h>
 #include <locale.h>
-#include "screens.h"
-#include "levels.h"
+#include "../headers/screens.h"
+#include "../headers/levels.h"
 
 int main() {
     WINDOW *w;

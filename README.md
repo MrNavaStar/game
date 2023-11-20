@@ -6,7 +6,7 @@ A simple terminal game written in c using the ncurses library.
 To play this project, simply run:
 ```bash
 git clone https://github.com/MrNavaStar/game.git
-cd game
+cd code
 make
-./game
+./code
 ```
