@@ -1,10 +1,13 @@
 #include <curses.h>
 #include <locale.h>
+#include <wchar.h>
 #include "../headers/screens.h"
 #include "../headers/levels.h"
 
 int main() {
     WINDOW *w;
+    wchar_t levels[3][30][81];
+
     setlocale(LC_ALL, ""); // Set locale so special chars print correctly
     initscr();
     init_colors();
@@ -16,14 +19,13 @@ int main() {
     if (LINES < 30 || COLS < 80) terminal_too_small_screen(w);
 
     splash_screen(w);
-    //game_over_screen(w);
-    //victory_screen(w);
-    display_level(w, 1);
+    load_level(levels, 1);
+    load_level(levels, 2);
+    load_level(levels, 3);
+
+    display_level(w, levels, 1);
     getch();
-    display_level(w, 2);
-    getch();
-    display_level(w, 3);
-    getch();
+
     endwin();
     return 0;
 }

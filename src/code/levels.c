@@ -6,10 +6,8 @@
 #include "../headers/screens.h"
 
 
-void display_level(WINDOW *w, int level) {
-	clear();
+void load_level(wchar_t levels[][30][81], int level) {
 	FILE *fptr;
-	wchar_t levelStr[2400]; // 30*80 chars = 2400
 
     char file_name[18] = "assets/level";
     char level_index[2];
@@ -25,10 +23,22 @@ void display_level(WINDOW *w, int level) {
         exit(EXIT_FAILURE);
     }
 
-    // In the future we will load into an array, so we can move the player around. But for now just print it
-    for (int i = 0; i<30; i++) {
-        fgetws(levelStr, 2400, fptr);
-        printw("%ls", levelStr);
+    for (int i = 0; i < 30; i++) {
+        for (int j = 0; j < 81; j++) { // File is 81 chars wide when including newlines
+            wchar_t next = fgetwc(fptr);
+            if (j == 80) next = L'\0';
+            levels[level - 1][i][j] = next;
+        }
     }
 	fclose(fptr);
+}
+
+void display_level(WINDOW *w, wchar_t levels[][30][81], int level) {
+    clear();
+
+    for (int i = 0; i < 30; i++) {
+        wchar_t *line = levels[level - 1][i];
+        printw("%ls", line);
+        //render_text(line, center_text(w, line), i);
+    }
 }

@@ -1,4 +1,5 @@
 #include <curses.h>
+#include <wchar.h>
 
 // Set up the color pairs used in the code
 void init_colors();
@@ -14,3 +15,7 @@ void game_over_screen(WINDOW *w);
 
 // Show the win screen
 void victory_screen(WINDOW *w);
+
+// Text render utils
+void render_text(wchar_t *text, int x, int y);
+int center_text(WINDOW *w, wchar_t *text);
