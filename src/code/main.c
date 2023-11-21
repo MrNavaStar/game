@@ -31,11 +31,9 @@ int main() {
 	if(ch == 'q'){
 	    quit_screen(w);
 	    ch = getch();
-	    if(ch == 'y'){
-            	break;
-	    }
+	    if(ch == 'y')break;
 	    else if(ch == 'n'){
-	    	continue;
+		continue;
 		//go back to original screen level
 	    }
 	}
@@ -44,11 +42,15 @@ int main() {
 	    pause_screen(w);
 	    while(1){
 	    	getch();
-		if(ch == 'p'){
-		    break;
-		}
+		if(ch == 'p')break;
 	    }
 	    //go back to original screen level
+	}
+	
+	else if(ch == 'w'){
+	    if(p.y-1 ==' ')//player move up function;
+
+	    
 	}
         ch = getch();
     }
