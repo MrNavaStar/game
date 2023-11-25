@@ -4,12 +4,21 @@
 #include "../headers/screens.h"
 #include "../headers/levels.h"
 
-typedef struct Player{
+typedef struct Player {
    int x;
    int y;
    wchar_t ch;
    int level;
 } Player;
+
+// translates the player from its current position
+void move_player(Player *p, wchar_t levels[][30][81], int x, int y) {
+    levels[p->level - 1][p->y][p->x] = L' '; // Clear current pos
+    levels[p->level - 1][p->y + y][p->x + x] = p->ch; // Move char to new pos
+    // Update pos in struct
+    p->y = p->y + y;
+    p->x = p->x + x;
+}
 
 int main() {
     int ch;
@@ -53,32 +62,20 @@ int main() {
         }
 
         //move character up function
-        else if (ch == 'w' && levels[p.level][p.y-1][p.x] == L' ') {
-            levels[p.level - 1][p.y][p.x] = L' ';
-            levels[p.level - 1][p.y-1][p.x] = p.ch;
-            p.y = p.y - 1;
-        }
+        else if (ch == 'w' && levels[p.level][p.y-1][p.x] == L' ')
+            move_player(&p, levels, 0, -1);
 
         //move character down function
-        else if (ch == 's' && levels[p.level][p.y+1][p.x] == L' ') {
-            levels[p.level - 1][p.y][p.x] = L' ';
-            levels[p.level - 1][p.y+1][p.x] = p.ch;
-            p.y = p.y + 1;
-        }
+        else if (ch == 's' && levels[p.level][p.y+1][p.x] == L' ')
+            move_player(&p, levels, 0, 1);
 
         //move character left function
-        else if (ch == 'a' && levels[p.level][p.y][p.x-1] == L' ') {
-            levels[p.level - 1][p.y][p.x] = L' ';
-            levels[p.level - 1][p.y][p.x-1] = p.ch;
-            p.x = p.x - 1;
-        }
+        else if (ch == 'a' && levels[p.level][p.y][p.x-1] == L' ')
+            move_player(&p, levels, -1, 0);
 
         //move character right function
-        else if (ch == 'd' && levels[p.level][p.y][p.x+1] == L' ') {
-            levels[p.level - 1][p.y][p.x] = L' ';
-            levels[p.level - 1][p.y][p.x+1] = p.ch;\
-            p.x = p.x + 1;
-        }
+        else if (ch == 'd' && levels[p.level][p.y][p.x+1] == L' ')
+            move_player(&p, levels, 1, 0);
 
         display_level(w, levels, p.level);
     }
