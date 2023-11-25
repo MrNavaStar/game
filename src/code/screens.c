@@ -7,11 +7,13 @@
 
 #define TEXT_GREEN COLOR_PAIR(1)
 #define TEXT_RED COLOR_PAIR(2)
+#define TEXT_CYAN COLOR_PAIR(3)
 
 void init_colors() {
     start_color();
     init_pair(1, COLOR_GREEN, COLOR_BLACK);
     init_pair(2, COLOR_RED, COLOR_BLACK);
+    init_pair(3, COLOR_CYAN, COLOR_BLACK);
 }
 
 // Render single or multiline text at the given coords
@@ -73,64 +75,6 @@ void terminal_too_small_screen(WINDOW *w) {
     render_text(warn, center_text(w, warn), 4);
     attroff(TEXT_RED);
     render_continue_prompt(w, 5);
-}
-
-
-// Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
-void quit_screen(WINDOW *w){
-   clear();
-   wchar_t quit[] = L"   █████   █    ██  ██▓▄▄▄█████▓\n"
-                     " ▒██▓  ██▒ ██  ▓██▒▓██▒▓  ██▒ ▓▒\n"
-                     " ▒██▒  ██░▓██  ▒██░▒██▒▒ ▓██░ ▒░\n"
-                     " ░██  █▀ ░▓▓█  ░██░░██░░ ▓██▓ ░ \n"
-                     " ░▒███▒█▄ ▒▒█████▓ ░██░  ▒██▒ ░ \n"
-                     " ░░ ▒▒░ ▒ ░▒▓▒ ▒ ▒ ░▓    ▒ ░░   \n"
-                     "  ░ ▒░  ░ ░░▒░ ░ ░  ▒ ░    ░    \n"
-                     "  ░   ░  ░░░ ░ ░  ▒ ░  ░        \n"
-                     "   ░       ░      ░               ";
-                                                                      
-   wchar_t game[] = L"  ▄████  ▄▄▄       ███▄ ▄███▓▓█████  \n"
-                     "  ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀ \n"
-                     " ▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███   \n"
-                     " ░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄ \n"
-                     " ░▒▓███▀▒ ▓█   ▓██▒▒██▒   ░██▒░▒████▒\n"
-                     "  ░▒   ▒  ▒▒   ▓▒█░░ ▒░   ░  ░░░ ▒░ ░\n"
-                     "           ▒   ▒▒ ░░  ░      ░ ░ ░  ░\n"
-                     "         ░   ▒   ░      ░      ░     \n"
-                     "  ░       ░  ░       ░      ░  ░       ";
- 
-   attron(TEXT_RED);
-   render_text(quit, center_text(w, quit), 2);
-   render_text(game, center_text(w, game), 13);
-   attroff(TEXT_RED);
-
-   wchar_t directions[] = L"Press y to quit or n to continue";
-   render_text(directions, center_text(w, directions), 25);
-
-}
-
-
-// Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
-void pause_screen(WINDOW *w){
-   clear();
-   wchar_t pause[] = L" ██▓███   ▄▄▄       █    ██   ██████ ▓█████ ▓█████▄ \n"
-                      "▓██░  ██▒▒████▄     ██  ▓██▒▒██    ▒ ▓█   ▀ ▒██▀ ██▌\n"
-                      "▓██░ ██▓▒▒██  ▀█▄  ▓██  ▒██░░ ▓██▄   ▒███   ░██   █▌\n"
-                      "▒██▄█▓▒ ▒░██▄▄▄▄██ ▓▓█  ░██░  ▒   ██▒▒▓█  ▄ ░▓█▄   ▌\n"
-                      "▒██▒ ░  ░ ▓█   ▓██▒▒▒█████▓ ▒██████▒▒░▒████▒░▒████▓ \n"
-                      "▒▓▒░ ░  ░ ▒▒   ▓▒█░░▒▓▒ ▒ ▒ ▒ ▒▓▒ ▒ ░░░ ▒░ ░ ▒▒▓  ▒ \n"
-                      "░▒ ░       ▒   ▒▒ ░░░▒░ ░ ░ ░ ░▒  ░ ░ ░ ░  ░ ░ ▒  ▒ \n"
-                      "░░         ░   ▒    ░░░ ░ ░ ░  ░  ░     ░    ░ ░  ░ \n"
-                      "░  ░   ░           ░     ░  ░   ░                   \n";
-                                                   
-
-   attron(TEXT_RED);
-   render_text(pause, center_text(w, pause), 2);
-   attroff(TEXT_RED);
-
-   wchar_t directions[] = L"Press p to unpause";
-   render_text(directions, center_text(w, directions), 25);
-
 }
 
 // Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
@@ -217,4 +161,59 @@ void victory_screen(WINDOW *w) {
     render_text(victory, center_text(w, victory), 10);
     attroff(TEXT_GREEN);
     render_continue_prompt(w, 25);
+}
+
+// Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
+void quit_screen(WINDOW *w) {
+    clear();
+    wchar_t quit[] = L"   █████   █    ██  ██▓▄▄▄█████▓\n"
+                     " ▒██▓  ██▒ ██  ▓██▒▓██▒▓  ██▒ ▓▒\n"
+                     " ▒██▒  ██░▓██  ▒██░▒██▒▒ ▓██░ ▒░\n"
+                     " ░██  █▀ ░▓▓█  ░██░░██░░ ▓██▓ ░ \n"
+                     " ░▒███▒█▄ ▒▒█████▓ ░██░  ▒██▒ ░ \n"
+                     " ░░ ▒▒░ ▒ ░▒▓▒ ▒ ▒ ░▓    ▒ ░░   \n"
+                     "  ░ ▒░  ░ ░░▒░ ░ ░  ▒ ░    ░    \n"
+                     "  ░   ░  ░░░ ░ ░  ▒ ░  ░        \n"
+                     "   ░       ░      ░               ";
+
+    wchar_t game[] = L"  ▄████  ▄▄▄       ███▄ ▄███▓▓█████  \n"
+                     "  ██▒ ▀█▒▒████▄    ▓██▒▀█▀ ██▒▓█   ▀ \n"
+                     " ▒██░▄▄▄░▒██  ▀█▄  ▓██    ▓██░▒███   \n"
+                     " ░▓█  ██▓░██▄▄▄▄██ ▒██    ▒██ ▒▓█  ▄ \n"
+                     " ░▒▓███▀▒ ▓█   ▓██▒▒██▒   ░██▒░▒████▒\n"
+                     "  ░▒   ▒  ▒▒   ▓▒█░░ ▒░   ░  ░░░ ▒░ ░\n"
+                     "           ▒   ▒▒ ░░  ░      ░ ░ ░  ░\n"
+                     "         ░   ▒   ░      ░      ░     \n"
+                     "  ░       ░  ░       ░      ░  ░       ";
+
+    attron(TEXT_RED);
+    render_text(quit, center_text(w, quit), 2);
+    render_text(game, center_text(w, game), 13);
+    attroff(TEXT_RED);
+
+    wchar_t directions[] = L"Press y to quit or n to continue";
+    render_text(directions, center_text(w, directions), 25);
+}
+
+// Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
+void pause_screen(WINDOW *w) {
+    clear();
+    wchar_t pause[] = L" ██▓███   ▄▄▄       █    ██   ██████ ▓█████ ▓█████▄ \n"
+                      "▓██░  ██▒▒████▄     ██  ▓██▒▒██    ▒ ▓█   ▀ ▒██▀ ██▌\n"
+                      "▓██░ ██▓▒▒██  ▀█▄  ▓██  ▒██░░ ▓██▄   ▒███   ░██   █▌\n"
+                      "▒██▄█▓▒ ▒░██▄▄▄▄██ ▓▓█  ░██░  ▒   ██▒▒▓█  ▄ ░▓█▄   ▌\n"
+                      "▒██▒ ░  ░ ▓█   ▓██▒▒▒█████▓ ▒██████▒▒░▒████▒░▒████▓ \n"
+                      "▒▓▒░ ░  ░ ▒▒   ▓▒█░░▒▓▒ ▒ ▒ ▒ ▒▓▒ ▒ ░░░ ▒░ ░ ▒▒▓  ▒ \n"
+                      "░▒ ░       ▒   ▒▒ ░░░▒░ ░ ░ ░ ░▒  ░ ░ ░ ░  ░ ░ ▒  ▒ \n"
+                      "░░         ░   ▒    ░░░ ░ ░ ░  ░  ░     ░    ░ ░  ░ \n"
+                      "░  ░   ░           ░     ░  ░   ░                   \n";
+
+
+    attron(TEXT_CYAN);
+    render_text(pause, center_text(w, pause), 10);
+    attroff(TEXT_CYAN);
+
+    wchar_t directions[] = L"Press p to unpause";
+    render_text(directions, center_text(w, directions), 25);
+
 }
