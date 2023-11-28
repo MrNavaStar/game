@@ -1,3 +1,10 @@
+/***********************
+ * Group: 2
+ * Members: Neshko and Ethan
+ * Lab: 10
+ * Date: 11/28/2023
+ ***********************/
+
 #include <stdio.h>
 #include <curses.h>
 #include <stdlib.h>

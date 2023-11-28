@@ -1,3 +1,10 @@
+/***********************
+ * Group: 2
+ * Members: Neshko and Ethan
+ * Lab: 10
+ * Date: 11/28/2023
+ ***********************/
+
 #include <curses.h>
 #include <string.h>
 #include <wchar.h>
@@ -107,9 +114,9 @@ void splash_screen(WINDOW *w) {
     render_text(conquest, center_text(w, conquest), 13);
     attroff(TEXT_GREEN);
 
-    wchar_t controls[] = L"Use WASD To Move - E To Interact";
+    wchar_t controls[] = L"Use WASD To Move - E To Interact\n - I To Check Inventory\n - P To Pause\n - Q To Quit";
     render_text(controls, center_text(w, controls), 25);
-    render_continue_prompt(w, 27);
+    render_continue_prompt(w, 30);
 }
 
 // Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
@@ -235,7 +242,7 @@ void inventory_screen(WINDOW *w) {
                              "    |                     \n"; 
     
     
-    wchar_t big_sword[] = L"              />                                                           \n"
+  /*  wchar_t big_sword[] = L"              />                                                           \n"
     			   "  ()         //---------------------------------------------------------(  \n"
     			   "(*)OXOXOXOXO(*>                                                          \\ \n"
     			   "  ()        \\\\-----------------------------------------------------------)\n"
@@ -277,7 +284,7 @@ void inventory_screen(WINDOW *w) {
 			   "|(::)|\n"
 			   "| )( |\n"
 			   "|(..)|\n"
-			   "+====+\n";
+			   "+====+\n";*/
     attron(TEXT_CYAN);
     render_text(inventory, center_text(w, inventory), 5);
     attroff(TEXT_CYAN);

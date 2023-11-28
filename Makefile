@@ -1,4 +1,8 @@
-# lab09
+
+
+# lab10
+# Group: 2
+# Members: Neshko and Ethan
 
 game:
 	cd src && make && mv game ../game && cp -r assets ../assets

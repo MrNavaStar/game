@@ -1,4 +1,13 @@
+/***********************
+ * Group: 2
+ * Members: Neshko and Ethan
+ * Lab: 10
+ * Date: 11/28/2023
+ * Description: This code will run Cryptic Conquest in all it's parts
+ ***********************/
+
 #include <curses.h>
+#include <stdlib.h>
 #include <locale.h>
 #include <wchar.h>
 #include "../headers/screens.h"
@@ -39,9 +48,17 @@ int main() {
         // Handle quit
         if (input == 'q') {
             quit_screen(w);
-            input = getch();
-            if (input == 'y') break;
-        }
+	    while(1) {
+	    input = getch();
+            if (input == 'y'){
+	         endwin();
+		 exit(0);
+	    }
+	    else if (input == 'n')break;
+	
+	    }
+	}
+        
 
         // Handle pause
         else if (input == 'p') {
@@ -65,5 +82,5 @@ int main() {
     }
 
     endwin();
-    return 0;
+    return(0);
 }

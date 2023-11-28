@@ -1,4 +1,6 @@
-# lab09
+# lab10
+# Group:2
+# Members: Neshko and Ethan
 
 CC=gcc
 CFLAGS=-Wall -std=c11

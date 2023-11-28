@@ -1,3 +1,6 @@
+Group: 2
+Members: Neshko, Ethan
+
 # Cryptic Conquest
 A simple terminal game written in c using the ncurses library.
 

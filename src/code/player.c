@@ -1,3 +1,10 @@
+/***********************
+ * Group: 2
+ * Members: Neshko and Ethan
+ * Lab: 10
+ * Date: 11/28/2023
+ ***********************/
+
 #include <wchar.h>
 #include "../headers/player.h"
 

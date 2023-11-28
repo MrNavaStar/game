@@ -1,3 +1,9 @@
+/***********************
+ * Group: 2
+ * Members: Neshko and Ethan
+ * Lab: 10
+ ***********************/
+
 #include <curses.h>
 #include <wchar.h>
 
