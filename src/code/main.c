@@ -14,7 +14,11 @@ int main() {
     p.y = 4;
     p.ch = L'@';
     p.level = 1;
-
+    p.big_sword = 0;
+    p.bow = 0;
+    p.shield = 0;
+    p.hourglass = 0;
+    
     setlocale(LC_ALL, ""); // Set locale so special chars print correctly
     initscr();
     init_colors();
@@ -47,6 +51,14 @@ int main() {
                 if (input == 'p') break;
             }
         }
+	else if (input == 'i') {
+            inventory_screen(w);
+            while (1) {
+                input = getch();
+                if (input == 'i') break;
+            }
+        }
+
 
         handle_user_input(&p, levels, input);
         display_level(w, levels, p.level);

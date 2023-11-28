@@ -22,6 +22,9 @@ void game_over_screen(WINDOW *w);
 // Show the win screen
 void victory_screen(WINDOW *w);
 
+//Show inventory screen
+void inventory_screen(WINDOW *w);
+
 // Text render utils
 void render_text(wchar_t *text, int x, int y);
 int center_text(WINDOW *w, wchar_t *text);

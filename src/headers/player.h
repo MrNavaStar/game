@@ -5,6 +5,10 @@ typedef struct Player {
     int y;
     wchar_t ch;
     int level;
+    int big_sword;
+    int bow;
+    int shield;
+    int hourglass;
 } Player;
 
 // translates the player from its current position & can be used to change the players current level if the passed

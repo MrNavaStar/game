@@ -31,9 +31,9 @@ void load_level(wchar_t levels[][30][81], int level) {
 
 void display_level(WINDOW *w, wchar_t levels[][30][81], int level) {
     clear();
-
     for (int i = 0; i < 30; i++) {
         wchar_t *line = levels[level - 1][i];
         render_text(line, center_text(w, line), i);
     }
+
 }
