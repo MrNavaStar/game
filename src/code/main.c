@@ -7,9 +7,10 @@
  ***********************/
 
 #include <curses.h>
-#include <stdlib.h>
 #include <locale.h>
 #include <wchar.h>
+#include <time.h>
+#include <stdlib.h>
 #include "../headers/player.h"
 #include "../headers/screens.h"
 #include "../headers/levels.h"
@@ -33,17 +34,20 @@ int main() {
     initscr();
     init_colors();
     cbreak();
+    keypad(stdscr, TRUE);
     noecho();
     curs_set(0); // Hide cursor
     w = newwin(LINES, COLS, 0, 0);
     if (LINES < 30 || COLS < 80) terminal_too_small_screen(w);
 
+    srand(time(NULL));
     splash_screen(w);
     load_level(levels, 1);
     load_level(levels, 2);
     load_level(levels, 3);
 
     while (1) {
+        display_level(w, levels, p.level);
         input = getch();
 
         // Handle quit
@@ -74,10 +78,8 @@ int main() {
             }
         }
 
-
+        process_bad_guys(w, &p, levels, p.level);
         handle_user_input(w, &p, levels, input);
-        display_level(w, levels, p.level);
-
         if (p.kills >= 58) victory_screen(w);
     }
 }

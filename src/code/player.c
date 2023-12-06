@@ -28,7 +28,7 @@ void move_player(Player *p, wchar_t levels[][30][81], int level, int x, int y) {
 }
 
 void item_pickup(Player *p){
-    srand(time(NULL));
+    //srand(time(NULL));
     int r = rand() % 5;
     if (r == 0) p->big_sword = 1;
     else if (r == 1) p->bow = 1;
@@ -57,7 +57,6 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
                 p->kills++;
                 return;
             }
-            game_over_screen(w);
         }
     }
 
@@ -77,12 +76,11 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
                 p->kills++;
                 return;
             }
-            game_over_screen(w);
         }
     }
 
     // move character left
-    else if (input == 'a') {
+    else if (input == 'a' || input == KEY_LEFT) {
         wchar_t next = levels[p->level - 1][p->y][p->x-1];
         if (next == L' ') move_player(p, levels, p->level, -1, 0);
 
@@ -101,7 +99,6 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
                 p->kills++;
                 return;
             }
-            game_over_screen(w);
         }
     }
 
@@ -125,7 +122,6 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
                 p->kills++;
                 return;
             }
-            game_over_screen(w);
         }
     }
 }

@@ -6,9 +6,12 @@
 
 #include <curses.h>
 #include <wchar.h>
+#include "../headers/player.h"
 
 // Load the level from the file given a number
 void load_level(wchar_t levels[][30][81], int level);
 
 // Display the level from the array given a number
 void display_level(WINDOW *w, wchar_t levels[][30][81], int level);
+
+void process_bad_guys(WINDOW *w, Player *p, wchar_t levels[][30][81], int level);
