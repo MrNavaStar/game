@@ -258,25 +258,13 @@ void inventory_screen(WINDOW *w, Player *p) {
 			   "              \\>                                                           \n"; 
     
     
-    wchar_t bow[] = L"          4$$-.               \n"            
-           	     "		4   '.              \n"                          
-           	     "		4    ^.             \n"                          
-           	     "	 	4     $             \n"                          
-           	     "	 	4     'b            \n"                          
-           	     "		4      'b.          \n"                          
-           	     "		4        $          \n"                          
-           	     "	        4        $r         \n"                          
-           	     "		4        $F         \n"                          
-		     "-$b========4========$b====*P=-\n"                           
-           	     "		4       *$$F        \n"                          
-           	     "		4        $$'        \n"                          
-           	     "		4       .$F         \n"                          
-           	     "		4       dP          \n"                          
-           	     "		4      F            \n"                          
-           	     "		4     @             \n"                          
-           	     "		4    .              \n"                          
-          	     "		 J.                 \n"                           
-          	     "		'$$ 		    \n";
+    wchar_t bow[] = L"    (      \n"
+                     "     \\     \n"
+                     "      )    \n"
+                     "##-------->\n"
+                     "      )    \n"
+                     "     /     \n"
+                     "    (      \n";
     
 
 
@@ -287,20 +275,19 @@ void inventory_screen(WINDOW *w, Player *p) {
   			"\\   o\\/o   /\n"
    			" \\   ||   / \n"
     			"  \\  ||  /  \n"
-  			"   '.||.'   \n"
-       			"     ``     \n";
+  			"   '.||.'   \n";
     wchar_t hourglass[] = L"+====+\n"
 			   "|(::)|\n"
 			   "| )( |\n"
 			   "|(..)|\n"
 			   "+====+\n";
     attron(TEXT_CYAN);
-    render_text(inventory, center_text(w, inventory), 5);
+    render_text(inventory, center_text(w, inventory), 1);
     attroff(TEXT_CYAN);
-    if (p->big_sword == 0) render_text(small_sword, center_text(w, small_sword), 15);
-    else if (p->big_sword == 1)render_text(big_sword, center_text(w, big_sword), 15);
-    if (p->bow == 1) render_text(bow, center_text(w,bow), 25);
-    if (p->shield == 1) render_text(shield, 90, 40);
-    if (p->hourglass == 1) render_text(hourglass, 60, 40);
+    if (p->big_sword == 0) render_text(small_sword, center_text(w, small_sword), 10);
+    else if (p->big_sword == 1)render_text(big_sword, center_text(w, big_sword), 10);
+    if (p->bow == 1) render_text(bow, center_text(w,bow), 14);
+    if (p->shield == 1) render_text(shield,center_text(w,shield) ,21 );
+    if (p->hourglass == 1) render_text(hourglass, center_text(w,hourglass), 30);
 
 } 
