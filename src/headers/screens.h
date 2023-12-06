@@ -6,6 +6,7 @@
 
 #include <curses.h>
 #include <wchar.h>
+#include "player.h"
 
 // Set up the color pairs used in the code
 void init_colors();
@@ -29,7 +30,7 @@ void game_over_screen(WINDOW *w);
 void victory_screen(WINDOW *w);
 
 //Show inventory screen
-void inventory_screen(WINDOW *w);
+void inventory_screen(WINDOW *w, Player *p);
 
 // Text render utils
 void render_text(wchar_t *text, int x, int y);

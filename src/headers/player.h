@@ -4,6 +4,8 @@
  * Lab: 10
  ***********************/
 
+#ifndef PLAYER_H
+#define PLAYER_H
 #include <wchar.h>
 
 typedef struct Player {
@@ -21,5 +23,10 @@ typedef struct Player {
 // in level does not match p.level
 void move_player(Player *p, wchar_t levels[][30][81], int level, int x, int y);
 
+// simple code that will gnenerate a random number and allow the player to add this random item to their inventory
+void item_pickup(Player *p);
+
 // Must be called every game loop to process keyboard inputs for the player
 void handle_user_input(Player *p, wchar_t levels[][30][81], char input);
+
+#endif

@@ -10,9 +10,10 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <wchar.h>
+#include "../headers/player.h"
 #include "../headers/screens.h"
 #include "../headers/levels.h"
-#include "../headers/player.h"
+
 
 int main() {
     char input;
@@ -69,7 +70,7 @@ int main() {
             }
         }
 	else if (input == 'i') {
-            inventory_screen(w);
+            inventory_screen(w,&p);
             while (1) {
                 input = getch();
                 if (input == 'i') break;

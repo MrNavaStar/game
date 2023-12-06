@@ -8,6 +8,8 @@
 #include <curses.h>
 #include <string.h>
 #include <wchar.h>
+#include "../headers/player.h"
+
 
 // This class uses the cursed wchar_t in order to support extended ascii. If you have to modify to this file I'm sorry.
 // But only a little because the ascii art is cool.
@@ -225,7 +227,7 @@ void pause_screen(WINDOW *w) {
 
 }
 // Text generated with https://www.asciiart.eu and https://patorjk.com/software/taag/#p=display&f=Bloody
-void inventory_screen(WINDOW *w) {
+void inventory_screen(WINDOW *w, Player *p) {
     clear();
     wchar_t inventory[] = L" ██▓ ███▄    █ ██▒   █▓▓█████  ███▄    █ ▄▄▄█████▓ ▒█████   ██▀███ ▓██   ██▓\n"
 		           "▓██▒ ██ ▀█   █▓██░   █▒▓█   ▀  ██ ▀█   █ ▓  ██▒ ▓▒▒██▒  ██▒▓██ ▒ ██▒▒██  ██▒\n"
@@ -242,7 +244,7 @@ void inventory_screen(WINDOW *w) {
                              "    |                     \n"; 
     
     
-  /*  wchar_t big_sword[] = L"              />                                                           \n"
+    wchar_t big_sword[] = L"              />                                                           \n"
     			   "  ()         //---------------------------------------------------------(  \n"
     			   "(*)OXOXOXOXO(*>                                                          \\ \n"
     			   "  ()        \\\\-----------------------------------------------------------)\n"
@@ -284,10 +286,14 @@ void inventory_screen(WINDOW *w) {
 			   "|(::)|\n"
 			   "| )( |\n"
 			   "|(..)|\n"
-			   "+====+\n";*/
+			   "+====+\n";
     attron(TEXT_CYAN);
     render_text(inventory, center_text(w, inventory), 5);
     attroff(TEXT_CYAN);
+    if (p->big_sword == 0) render_text(small_sword, center_text(w, small_sword), 15);
+    else if (p->big_sword == 1)render_text(big_sword, center_text(w, big_sword), 15);
+    if (p->bow == 1) render_text(bow, center_text(w,bow), 25);
+    if (p->shield == 1) render_text(shield, 90, 40);
+    if (p->hourglass == 1) render_text(hourglass, 60, 40);
 
-    render_text(small_sword, center_text(w, small_sword), 15);
 } 
