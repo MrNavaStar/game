@@ -130,7 +130,7 @@ void splash_screen(WINDOW *w) {
     render_text(conquest, center_text(w, conquest), 13);
     attroff(TEXT_GREEN);
 
-    wchar_t controls[] = L"Use WASD To Move - E To Interact\n - I To Check Inventory\n - P To Pause\n - Q To Quit";
+    wchar_t controls[] = L" - Use WASD To Move\n - I To Check Inventory\n - P To Pause\n - Q To Quit";
     render_text(controls, center_text(w, controls), 25);
     render_continue_prompt(w, 30);
 }
