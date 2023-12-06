@@ -12,7 +12,7 @@
 void init_colors();
 
 // Closes the ncurses screen and exits the program
-void exit_game();
+void exit_game(WINDOW *w, int wait);
 
 // Show terminal too small screen - maybe adapt this into a general error screen
 void terminal_too_small_screen(WINDOW *w);

@@ -37,7 +37,7 @@ void item_pickup(Player *p){
 }
 
 int has_all_items(Player *p) {
-    return p->big_sword && p->bow && p->shield && p->hourglass;
+    return p->bow && p->shield && p->hourglass;
 }
 
 void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char input) {
@@ -54,6 +54,7 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
         else if (next == L'E') {
             if (has_all_items(p)) {
                 set_char(levels, p->level, p->x, p->y-1, L' ');
+                p->kills++;
                 return;
             }
             game_over_screen(w);
@@ -73,6 +74,7 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
         else if (next == L'E') {
             if (has_all_items(p)) {
                 set_char(levels, p->level, p->x, p->y+1, L' ');
+                p->kills++;
                 return;
             }
             game_over_screen(w);
@@ -96,6 +98,7 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
         else if (next == L'E') {
             if (has_all_items(p)) {
                 set_char(levels, p->level, p->x-1, p->y, L' ');
+                p->kills++;
                 return;
             }
             game_over_screen(w);
@@ -113,12 +116,13 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
 
         //open chest and pickup item
         else if (next == L'C'){
-           item_pickup(p);
+            item_pickup(p);
             set_char(levels, p->level, p->x+1, p->y, L'O');
         }
         else if (next == L'E') {
             if (has_all_items(p)) {
                 set_char(levels, p->level, p->x+1, p->y, L' ');
+                p->kills++;
                 return;
             }
             game_over_screen(w);

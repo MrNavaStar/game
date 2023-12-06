@@ -51,7 +51,7 @@ int main() {
             quit_screen(w);
             while(1) {
                 input = getch();
-                if (input == 'y') exit_game();
+                if (input == 'y') exit_game(w,0);
                 else if (input == 'n') break;
             }
 	    }

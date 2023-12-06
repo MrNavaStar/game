@@ -9,6 +9,7 @@
 #include <curses.h>
 #include <string.h>
 #include <wchar.h>
+#include<unistd.h>
 #include "../headers/player.h"
 
 
@@ -24,11 +25,6 @@ void init_colors() {
     init_pair(1, COLOR_GREEN, COLOR_BLACK);
     init_pair(2, COLOR_RED, COLOR_BLACK);
     init_pair(3, COLOR_CYAN, COLOR_BLACK);
-}
-
-void exit_game() {
-    endwin();
-    exit(0);
 }
 
 // Render single or multiline text at the given coords
@@ -70,7 +66,19 @@ int get_width(wchar_t *text) {
 // Returns the x position that will result in the given text block being centered on the screen
 int center_text(WINDOW *w, wchar_t *text) {
     return (getmaxx(w) / 2) - (get_width(text) / 2);
-}  
+}
+
+void exit_game(WINDOW *w, int wait) {
+    if (wait) {
+        wchar_t exiting[] = L"Exiting in 2 seconds...";
+        render_text(exiting, center_text(w, exiting), 27);
+        refresh();
+
+        sleep(2);
+    }
+    endwin();
+    exit(0);
+}
 
 void render_continue_prompt(WINDOW *w, int y) {
     wchar_t press[] = L"Press Any Key To Continue";
@@ -157,7 +165,7 @@ void game_over_screen(WINDOW *w) {
     render_text(over, center_text(w, over), 13);
     attroff(TEXT_RED);
     render_continue_prompt(w, 25);
-    exit_game();
+    exit_game(w, 1);
 }
 
 // Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
@@ -177,7 +185,7 @@ void victory_screen(WINDOW *w) {
     render_text(victory, center_text(w, victory), 10);
     attroff(TEXT_GREEN);
     render_continue_prompt(w, 25);
-    exit_game();
+    exit_game(w, 1);
 }
 
 // Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
