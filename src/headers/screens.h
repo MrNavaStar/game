@@ -11,6 +11,9 @@
 // Set up the color pairs used in the code
 void init_colors();
 
+// Closes the ncurses screen and exits the program
+void exit_game();
+
 // Show terminal too small screen - maybe adapt this into a general error screen
 void terminal_too_small_screen(WINDOW *w);
 

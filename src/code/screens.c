@@ -5,6 +5,7 @@
  * Date: 11/28/2023
  ***********************/
 
+#include <stdlib.h>
 #include <curses.h>
 #include <string.h>
 #include <wchar.h>
@@ -23,6 +24,11 @@ void init_colors() {
     init_pair(1, COLOR_GREEN, COLOR_BLACK);
     init_pair(2, COLOR_RED, COLOR_BLACK);
     init_pair(3, COLOR_CYAN, COLOR_BLACK);
+}
+
+void exit_game() {
+    endwin();
+    exit(0);
 }
 
 // Render single or multiline text at the given coords
@@ -151,6 +157,7 @@ void game_over_screen(WINDOW *w) {
     render_text(over, center_text(w, over), 13);
     attroff(TEXT_RED);
     render_continue_prompt(w, 25);
+    exit_game();
 }
 
 // Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody

@@ -49,16 +49,12 @@ int main() {
         // Handle quit
         if (input == 'q') {
             quit_screen(w);
-	    while(1) {
-	    input = getch();
-            if (input == 'y'){
-	         endwin();
-		 exit(0);
+            while(1) {
+                input = getch();
+                if (input == 'y') exit_game();
+                else if (input == 'n') break;
+            }
 	    }
-	    else if (input == 'n')break;
-	
-	    }
-	}
         
 
         // Handle pause
@@ -69,7 +65,8 @@ int main() {
                 if (input == 'p') break;
             }
         }
-	else if (input == 'i') {
+
+	    else if (input == 'i') {
             inventory_screen(w,&p);
             while (1) {
                 input = getch();
@@ -78,10 +75,7 @@ int main() {
         }
 
 
-        handle_user_input(&p, levels, input);
+        handle_user_input(w, &p, levels, input);
         display_level(w, levels, p.level);
     }
-
-    endwin();
-    return(0);
 }
