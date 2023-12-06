@@ -177,6 +177,7 @@ void victory_screen(WINDOW *w) {
     render_text(victory, center_text(w, victory), 10);
     attroff(TEXT_GREEN);
     render_continue_prompt(w, 25);
+    exit_game();
 }
 
 // Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody

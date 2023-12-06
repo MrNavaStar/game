@@ -14,6 +14,7 @@ typedef struct Player {
     int y;
     wchar_t ch;
     int level;
+    int kills;
     int big_sword;
     int bow;
     int shield;

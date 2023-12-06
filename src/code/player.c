@@ -12,9 +12,13 @@
 #include "../headers/player.h"
 #include "../headers/screens.h"
 
+void set_char(wchar_t levels[][30][81], int level, int x, int y, wchar_t c) {
+    levels[level - 1][y][x] = c;
+}
+
 void move_player(Player *p, wchar_t levels[][30][81], int level, int x, int y) {
     // Clear current pos
-    levels[p->level - 1][p->y][p->x] = L' ';
+    set_char(levels, p->level, p->x, p->y, L' ');
     // Update pos & level
     p->y = p->y + y;
     p->x = p->x + x;
@@ -32,6 +36,10 @@ void item_pickup(Player *p){
     else if (r == 3) p->hourglass = 1;
 }
 
+int has_all_items(Player *p) {
+    return p->big_sword && p->bow && p->shield && p->hourglass;
+}
+
 void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char input) {
     // move character up
     if (input == 'w') {
@@ -41,9 +49,15 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
         //open chest and pickup item
         else if (next == L'C'){
             item_pickup(p);
-            levels[p->level -1][p->y-1][p->x] = L'O';
+            set_char(levels, p->level, p->x, p->y-1, L'O');
         }
-        else if (next == L'E') game_over_screen(w);
+        else if (next == L'E') {
+            if (has_all_items(p)) {
+                set_char(levels, p->level, p->x, p->y-1, L' ');
+                return;
+            }
+            game_over_screen(w);
+        }
     }
 
     // move character down
@@ -53,10 +67,16 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
 
         //open chest and pickup item
         else if (next == L'C'){
-           item_pickup(p);
-           levels[p->level -1][p->y+1][p->x] = L'O';
+            item_pickup(p);
+            set_char(levels, p->level, p->x, p->y+1, L'O');
         }
-        else if (next == L'E') game_over_screen(w);
+        else if (next == L'E') {
+            if (has_all_items(p)) {
+                set_char(levels, p->level, p->x, p->y+1, L' ');
+                return;
+            }
+            game_over_screen(w);
+        }
     }
 
     // move character left
@@ -70,10 +90,16 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
 
         //open chest and pickup item
 	    else if (next == L'C'){
-           item_pickup(p);
-           levels[p->level -1][p->y][p->x-1] = L'O';
+            item_pickup(p);
+            set_char(levels, p->level, p->x-1, p->y, L'O');
         }
-        else if (next == L'E') game_over_screen(w);
+        else if (next == L'E') {
+            if (has_all_items(p)) {
+                set_char(levels, p->level, p->x-1, p->y, L' ');
+                return;
+            }
+            game_over_screen(w);
+        }
     }
 
     // move character right
@@ -88,8 +114,14 @@ void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char inpu
         //open chest and pickup item
         else if (next == L'C'){
            item_pickup(p);
-           levels[p->level -1][p->y][p->x+1] = L'O';
+            set_char(levels, p->level, p->x+1, p->y, L'O');
         }
-        else if (next == L'E') game_over_screen(w);
+        else if (next == L'E') {
+            if (has_all_items(p)) {
+                set_char(levels, p->level, p->x+1, p->y, L' ');
+                return;
+            }
+            game_over_screen(w);
+        }
     }
 }

@@ -77,5 +77,7 @@ int main() {
 
         handle_user_input(w, &p, levels, input);
         display_level(w, levels, p.level);
+
+        if (p.kills >= 58) victory_screen(w);
     }
 }
