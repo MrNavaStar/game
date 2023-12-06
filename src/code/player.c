@@ -29,7 +29,7 @@ void move_player(Player *p, wchar_t levels[][30][81], int level, int x, int y) {
 
 void item_pickup(Player *p){
     srand(time(NULL));
-    int r = rand() % 5;
+    int r = rand() % 4;
     if (r == 0) p->big_sword = 1;
     else if (r == 1) p->bow = 1;
     else if (r == 2) p->shield = 1;
