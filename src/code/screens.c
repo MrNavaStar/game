@@ -279,8 +279,8 @@ void inventory_screen(WINDOW *w, Player *p) {
     attroff(TEXT_CYAN);
     if (p->big_sword == 0) render_text(small_sword, center_text(w, small_sword), 10);
     else if (p->big_sword == 1)render_text(big_sword, center_text(w, big_sword), 10);
-    if (p->bow == 1) render_text(bow, center_text(w,bow), 14);
-    if (p->shield == 1) render_text(shield,center_text(w,shield) ,21 );
-    if (p->hourglass == 1) render_text(hourglass, center_text(w,hourglass), 30);
+    if (p->bow == 1) render_text(bow, center_text(w,bow)+5, 14);
+    if (p->shield == 1) render_text(shield,center_text(w,shield)-7 ,20 );
+    if (p->hourglass == 1) render_text(hourglass, center_text(w,hourglass)+7, 25);
 
 } 
