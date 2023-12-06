@@ -51,7 +51,6 @@ void display_level(WINDOW *w, wchar_t levels[][30][81], int level) {
 
 int get_bad_guys(BadGuy *badGuys, wchar_t levels[][30][81], int level) {
     int size = 0;
-
     for (int i = 0; i < 30; i++) {
         for (int j = 0; j < 80; j++) {
             if (levels[level - 1][i][j] == L'E') {
@@ -61,6 +60,7 @@ int get_bad_guys(BadGuy *badGuys, wchar_t levels[][30][81], int level) {
                 badGuys[size] = badGuy;
 
                 size++;
+                badGuys = realloc(badGuys, (size + 1) * sizeof (BadGuy));
             };
         }
     }
@@ -68,7 +68,7 @@ int get_bad_guys(BadGuy *badGuys, wchar_t levels[][30][81], int level) {
 }
 
 void process_bad_guys(WINDOW *w, Player *p, wchar_t levels[][30][81], int level) {
-    BadGuy *badGuys = calloc(1, 400); // Make this more dynamic lol
+    BadGuy *badGuys = calloc(1, sizeof (BadGuy));
     int size = get_bad_guys(badGuys, levels, level);
 
     for (int i = 0; i < size; i++) {
