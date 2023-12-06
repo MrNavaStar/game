@@ -76,31 +76,39 @@ void process_bad_guys(WINDOW *w, Player *p, wchar_t levels[][30][81], int level)
 
         int r = rand() % 4;
         if (r == 0 && (levels[level - 1][badGuy.y - 1][badGuy.x] == L' ' || levels[level - 1][badGuy.y - 1][badGuy.x] == L'@')) {
-            if (levels[level - 1][badGuy.y - 1][badGuy.x] == L'@' && !has_all_items(p)) game_over_screen(w);
-
-            levels[level - 1][badGuy.y][badGuy.x] = L' ';
-            levels[level - 1][badGuy.y - 1][badGuy.x] = L'E';
+            if (levels[level - 1][badGuy.y - 1][badGuy.x] == L'@') {
+                if (!has_all_items(p)) game_over_screen(w);
+            } else {
+                levels[level - 1][badGuy.y][badGuy.x] = L' ';
+                levels[level - 1][badGuy.y - 1][badGuy.x] = L'E';
+            }
         }
 
         if (r == 1 && (levels[level - 1][badGuy.y + 1][badGuy.x] == L' ' || levels[level - 1][badGuy.y + 1][badGuy.x] == L'@')) {
-            if (levels[level - 1][badGuy.y + 1][badGuy.x] == L'@' && !has_all_items(p)) game_over_screen(w);
-
-            levels[level - 1][badGuy.y][badGuy.x] = L' ';
-            levels[level - 1][badGuy.y + 1][badGuy.x] = L'E';
+            if (levels[level - 1][badGuy.y + 1][badGuy.x] == L'@') {
+                if (!has_all_items(p)) game_over_screen(w);
+            } else {
+                levels[level - 1][badGuy.y][badGuy.x] = L' ';
+                levels[level - 1][badGuy.y + 1][badGuy.x] = L'E';
+            }
         }
 
         if (r == 2 && (levels[level - 1][badGuy.y][badGuy.x - 1] == L' ' || levels[level - 1][badGuy.y][badGuy.x - 1] == L'@')) {
-            if (levels[level - 1][badGuy.y][badGuy.x - 1] == L'@' && !has_all_items(p)) game_over_screen(w);
-
-            levels[level - 1][badGuy.y][badGuy.x] = L' ';
-            levels[level - 1][badGuy.y][badGuy.x - 1] = L'E';
+            if (levels[level - 1][badGuy.y][badGuy.x - 1] == L'@') {
+                if (!has_all_items(p)) game_over_screen(w);
+            } else {
+                levels[level - 1][badGuy.y][badGuy.x] = L' ';
+                levels[level - 1][badGuy.y][badGuy.x - 1] = L'E';
+            }
         }
 
         if (r == 3 && (levels[level - 1][badGuy.y][badGuy.x + 1] == L' ' || levels[level - 1][badGuy.y][badGuy.x + 1] == L'@')) {
-            if (levels[level - 1][badGuy.y][badGuy.x + 1] == L'@' && !has_all_items(p)) game_over_screen(w);
-
-            levels[level - 1][badGuy.y][badGuy.x] = L' ';
-            levels[level - 1][badGuy.y][badGuy.x + 1] = L'E';
+            if (levels[level - 1][badGuy.y][badGuy.x + 1] == L'@') {
+                if (!has_all_items(p)) game_over_screen(w);
+            } else {
+                levels[level - 1][badGuy.y][badGuy.x] = L' ';
+                levels[level - 1][badGuy.y][badGuy.x + 1] = L'E';
+            }
         }
     }
 
