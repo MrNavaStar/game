@@ -5,9 +5,11 @@
 # Members: Neshko and Ethan
 
 game:
-	cd src && make && mv game ../game && cp -r assets ../assets
+	cd src && make && mv game ../bin/game && cp -r assets ../bin/assets && mv *.o ../obj/
 
 .PHONY:
 clean:
-	rm -r -f game assets
-	cd src && make clean
+	cd bin && rm -f game *.o *~ && rm -r assets
+	cd obj && rm -f game *.o *~
+	
+
