@@ -17,6 +17,11 @@ typedef struct BadGuy {
     int y;
 } BadGuy;
 
+/**
+ * Load the level from the file given a number
+ * @param levels
+ * @param level
+ */
 void load_level(wchar_t levels[][30][81], int level) {
 	FILE *fptr;
 
@@ -41,6 +46,12 @@ void load_level(wchar_t levels[][30][81], int level) {
 	fclose(fptr);
 }
 
+/**
+ * Display the level from the array given a number
+ * @param w
+ * @param levels
+ * @param level
+ */
 void display_level(WINDOW *w, wchar_t levels[][30][81], int level) {
     clear();
     for (int i = 0; i < 30; i++) {
@@ -49,6 +60,13 @@ void display_level(WINDOW *w, wchar_t levels[][30][81], int level) {
     }
 }
 
+/**
+ * Returns a list of all the bad guys alive on the current level
+ * @param badGuys
+ * @param levels
+ * @param level
+ * @return
+ */
 int get_bad_guys(BadGuy *badGuys, wchar_t levels[][30][81], int level) {
     int size = 0;
     for (int i = 0; i < 30; i++) {
@@ -66,6 +84,13 @@ int get_bad_guys(BadGuy *badGuys, wchar_t levels[][30][81], int level) {
     return size;
 }
 
+/**
+ * Updates all the positions of the bad guys on the map and kills the player if it gets to close to one
+ * @param w
+ * @param p
+ * @param levels
+ * @param level
+ */
 void process_bad_guys(WINDOW *w, Player *p, wchar_t levels[][30][81], int level) {
     BadGuy *badGuys = calloc(100, sizeof (BadGuy));
     int size = get_bad_guys(badGuys, levels, level);

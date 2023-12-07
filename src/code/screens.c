@@ -20,6 +20,9 @@
 #define TEXT_RED COLOR_PAIR(2)
 #define TEXT_CYAN COLOR_PAIR(3)
 
+/**
+ * Set up the color pairs used in the code
+ */
 void init_colors() {
     start_color();
     init_pair(1, COLOR_GREEN, COLOR_BLACK);
@@ -27,7 +30,12 @@ void init_colors() {
     init_pair(3, COLOR_CYAN, COLOR_BLACK);
 }
 
-// Render single or multiline text at the given coords
+/**
+ * Renders a block of wide chars at the give xy pos
+ * @param text
+ * @param x
+ * @param y
+ */
 void render_text(wchar_t *text, int x, int y) {
     wchar_t *state;
     wchar_t *line;
@@ -43,7 +51,11 @@ void render_text(wchar_t *text, int x, int y) {
     }
 }
 
-// Get the screen width of a single line or block of text
+/**
+ * Get the horizontal width of a block of text - based on the longest of all the lines
+ * @param text
+ * @return
+ */
 int get_width(wchar_t *text) {
     int maxLen = 0;
     int currentLen = 0;
@@ -63,11 +75,21 @@ int get_width(wchar_t *text) {
     return maxLen;
 }
 
-// Returns the x position that will result in the given text block being centered on the screen
+/**
+ * Returns the x position that will result in the given text block being centered on the screen
+ * @param w
+ * @param text
+ * @return
+ */
 int center_text(WINDOW *w, wchar_t *text) {
     return (getmaxx(w) / 2) - (get_width(text) / 2);
 }
 
+/**
+ * Closes the ncurses screen and exits the program
+ * @param w
+ * @param wait
+ */
 void exit_game(WINDOW *w, int wait) {
     if (wait) {
         wchar_t exiting[] = L"Exiting in 2 seconds...";
@@ -80,6 +102,11 @@ void exit_game(WINDOW *w, int wait) {
     exit(0);
 }
 
+/**
+ * Renders a continue prompt on the screen the the give y value. Listens for any key to be pressed
+ * @param w
+ * @param y The height on the screen to render the prompt
+ */
 void render_continue_prompt(WINDOW *w, int y) {
     wchar_t press[] = L"Press Any Key To Continue";
     render_text(press, center_text(w, press), y);
@@ -87,6 +114,10 @@ void render_continue_prompt(WINDOW *w, int y) {
     getch();
 }
 
+/**
+ * Show terminal too small screen - maybe adapt this into a general error screen
+ * @param w
+ */
 void terminal_too_small_screen(WINDOW *w) {
     clear();
     wchar_t too_small[] = L"Terminal window too small!";
@@ -100,7 +131,10 @@ void terminal_too_small_screen(WINDOW *w) {
     render_continue_prompt(w, 5);
 }
 
-// Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
+/**
+ * Show the start-up screen
+ * @param w
+ */
 void splash_screen(WINDOW *w) {
     clear();
     wchar_t cryptic[] = L" ▄████▄   ██▀███ ▓██   ██▓ ██▓███  ▄▄▄█████▓ ██▓ ▄████▄  \n"
@@ -135,7 +169,10 @@ void splash_screen(WINDOW *w) {
     render_continue_prompt(w, 30);
 }
 
-// Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
+/**
+ * Show the failure screen
+ * @param w
+ */
 void game_over_screen(WINDOW *w) {
     clear();
     wchar_t game[] = L"  ▄████  ▄▄▄       ███▄ ▄███▓▓█████ \n"
@@ -168,7 +205,10 @@ void game_over_screen(WINDOW *w) {
     exit_game(w, 1);
 }
 
-// Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
+/**
+ * Show the win screen
+ * @param w
+ */
 void victory_screen(WINDOW *w) {
     clear();
     wchar_t victory[] = L" ██▒   █▓ ██▓ ▄████▄  ▄▄▄█████▓ ▒█████   ██▀███ ▓██   ██▓\n"
@@ -188,7 +228,10 @@ void victory_screen(WINDOW *w) {
     exit_game(w, 1);
 }
 
-// Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
+/**
+ * Show the quit screen
+ * @param w
+ */
 void quit_screen(WINDOW *w) {
     clear();
     wchar_t quit[] = L"   █████   █    ██  ██▓▄▄▄█████▓\n"
@@ -220,7 +263,10 @@ void quit_screen(WINDOW *w) {
     render_text(directions, center_text(w, directions), 25);
 }
 
-// Text generated with https://patorjk.com/software/taag/#p=display&f=Bloody
+/**
+ * Show the pause screen
+ * @param w
+ */
 void pause_screen(WINDOW *w) {
     clear();
     wchar_t pause[] = L" ██▓███   ▄▄▄       █    ██   ██████ ▓█████ ▓█████▄ \n"
@@ -242,7 +288,12 @@ void pause_screen(WINDOW *w) {
     render_text(directions, center_text(w, directions), 25);
 
 }
-// Text generated with https://www.asciiart.eu and https://patorjk.com/software/taag/#p=display&f=Bloody
+
+/**
+ * Show inventory screen
+ * @param w
+ * @param p
+ */
 void inventory_screen(WINDOW *w, Player *p) {
     clear();
     wchar_t inventory[] = L" ██▓ ███▄    █ ██▒   █▓▓█████  ███▄    █ ▄▄▄█████▓ ▒█████   ██▀███ ▓██   ██▓\n"
@@ -298,5 +349,4 @@ void inventory_screen(WINDOW *w, Player *p) {
     if (p->bow == 1) render_text(bow, center_text(w,bow)+5, 14);
     if (p->shield == 1) render_text(shield,center_text(w,shield)-7 ,20 );
     if (p->hourglass == 1) render_text(hourglass, center_text(w,hourglass)+7, 25);
-
-} 
+}

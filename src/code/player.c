@@ -5,17 +5,33 @@
  * Date: 11/28/2023
  ***********************/
 
-#include <time.h>
 #include <stdlib.h>
 #include <wchar.h>
 #include <curses.h>
 #include "../headers/player.h"
 #include "../headers/screens.h"
 
+/**
+ * Sets the selected char to the passed in char
+ * @param levels
+ * @param level
+ * @param x
+ * @param y
+ * @param c The new char
+ */
 void set_char(wchar_t levels[][30][81], int level, int x, int y, wchar_t c) {
     levels[level - 1][y][x] = c;
 }
 
+/**
+ * Translates the player from its current position & can be used to change the players current level if the passed
+ * in level does not match p.level
+ * @param p
+ * @param levels
+ * @param level
+ * @param x
+ * @param y
+ */
 void move_player(Player *p, wchar_t levels[][30][81], int level, int x, int y) {
     // Clear current pos
     set_char(levels, p->level, p->x, p->y, L' ');
@@ -27,8 +43,11 @@ void move_player(Player *p, wchar_t levels[][30][81], int level, int x, int y) {
     levels[p->level - 1][p->y][p->x] = p->ch;
 }
 
+/**
+ * Generates a random number and allow the player to add this random item to their inventory
+ * @param p
+ */
 void item_pickup(Player *p){
-    //srand(time(NULL));
     int r = rand() % 4;
     if (r == 0) p->big_sword = 1;
     else if (r == 1) p->bow = 1;
@@ -36,10 +55,22 @@ void item_pickup(Player *p){
     else if (r == 3) p->hourglass = 1;
 }
 
+/**
+ * Checks if a player has collected all of the items
+ * @param p
+ * @return
+ */
 int has_all_items(Player *p) {
     return p->bow && p->shield && p->hourglass;
 }
 
+/**
+ * Must be called every game loop to process keyboard inputs for the player
+ * @param w
+ * @param p
+ * @param levels
+ * @param input
+ */
 void handle_user_input(WINDOW *w, Player *p, wchar_t levels[][30][81], char input) {
     // move character up
     if (input == 'w') {
