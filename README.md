@@ -20,3 +20,11 @@ git clone https://github.com/MrNavaStar/game.git
 make
 ./game
 ```
+
+# How To Win
+- Start by moving around (Using the WASD Keys) the map collecting items from the chests (They are the C's on the map) Run into the chest to open it
+- Make sure to avoid the bad guys (They are the E's on the map). If they touch you, you will lose.
+- You can move between levels by running into the numbers on the map (Often at the end of a corridor). Be careful when going into level 3. If you don't have all the items, the enemies might block you way out, and you'll be stuck!
+- You can check your inventory by pressing "i". Once you have collected all 4 items, you will be able to kill the bad guys. Kill them by running into them. It helps to try and corner them if you can.
+- Once you kill all the bad guys on all three levels, you win!
+- The game takes roughly 5 - 10 min to complete. If you want to end the game sooner for testing purposes, modify the if check at the bottom of `src/code/main.c` from `if (p.kills >= 58) victory_screen(w);` to something like `if (p.kills >= 5) victory_screen(w);`. This will let you win by killing only 5 enemies.
