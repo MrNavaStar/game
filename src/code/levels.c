@@ -60,7 +60,6 @@ int get_bad_guys(BadGuy *badGuys, wchar_t levels[][30][81], int level) {
                 badGuys[size] = badGuy;
 
                 size++;
-                badGuys = realloc(badGuys, (size + 1) * sizeof (BadGuy));
             };
         }
     }
@@ -68,7 +67,7 @@ int get_bad_guys(BadGuy *badGuys, wchar_t levels[][30][81], int level) {
 }
 
 void process_bad_guys(WINDOW *w, Player *p, wchar_t levels[][30][81], int level) {
-    BadGuy *badGuys = calloc(1, sizeof (BadGuy));
+    BadGuy *badGuys = calloc(100, sizeof (BadGuy));
     int size = get_bad_guys(badGuys, levels, level);
 
     for (int i = 0; i < size; i++) {
