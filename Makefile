@@ -9,7 +9,7 @@ game:
 
 .PHONY:
 clean:
-	rm -f -r html latex
+	rm -f -r doc
 	cd bin && rm -f game *.o *~ && rm -r assets
 	cd obj && rm -f game *.o *~
 
