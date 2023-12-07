@@ -18,7 +18,7 @@ To play this project, simply run:
 ```bash
 git clone https://github.com/MrNavaStar/game.git
 make
-./game
+./bin/game
 ```
 
 # How To Win
